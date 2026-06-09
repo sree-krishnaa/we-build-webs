@@ -1,17 +1,28 @@
 /* ===================================================
-   KRISH PORTFOLIO — script.js  (cleaned & optimised)
+   KRISH PORTFOLIO — script.js  (refactored + animated)
 =================================================== */
+
+/* ---- Utility ---- */
+const qs  = (sel, ctx = document) => ctx.querySelector(sel);
+const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+const isPointerFine = window.matchMedia('(pointer: fine)').matches;
+
+/* ---- Page load entrance ---- */
+window.addEventListener('load', () => {
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.6s ease';
+  setTimeout(() => { document.body.style.opacity = '1'; }, 50);
+});
 
 /* ---- Custom Cursor (desktop / pointer devices only) ---- */
 const cursor    = document.getElementById('cursor');
 const cursorDot = document.getElementById('cursor-dot');
 
-if (window.matchMedia('(pointer: fine)').matches && cursor && cursorDot) {
+if (isPointerFine && cursor && cursorDot) {
   let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
 
   document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    mouseX = e.clientX; mouseY = e.clientY;
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top  = mouseY + 'px';
   });
@@ -24,7 +35,7 @@ if (window.matchMedia('(pointer: fine)').matches && cursor && cursorDot) {
     requestAnimationFrame(animateCursor);
   })();
 
-  document.querySelectorAll('a, button, .acc-head, [data-tilt]').forEach(el => {
+  qsa('a, button, .acc-head, [data-tilt]').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.transform   = 'translate(-50%, -50%) scale(1.6)';
       cursor.style.background  = 'rgba(230,51,41,0.15)';
@@ -42,13 +53,12 @@ if (window.matchMedia('(pointer: fine)').matches && cursor && cursorDot) {
 const navbar = document.getElementById('navbar');
 
 function updateActiveNav() {
-  const sections = document.querySelectorAll('section[id]');
-  const links    = document.querySelectorAll('.nav-link');
+  const sections = qsa('section[id]');
   let current = '';
   sections.forEach(sec => {
     if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
   });
-  links.forEach(link => {
+  qsa('.nav-link').forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === '#' + current);
   });
 }
@@ -70,8 +80,6 @@ if (menuBtn && navLinks) {
     menuBtn.textContent = open ? '✕' : '☰';
     menuBtn.setAttribute('aria-label', open ? 'Close Menu' : 'Open Menu');
   });
-
-  // Close menu when a link is tapped
   navLinks.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('active');
@@ -81,28 +89,20 @@ if (menuBtn && navLinks) {
 }
 
 /* ---- Scroll Reveal ---- */
-const revealEls = document.querySelectorAll(
-  '.project-card, .why-card, .step, .tl-item, .acc-item, .hero-tags, .about-stat'
-);
+const revealEls = qsa('.project-card, .why-card, .step, .tl-item, .acc-item, .hero-tags, .about-stat');
 revealEls.forEach((el, i) => {
   el.classList.add('reveal');
   el.style.transitionDelay = (i % 4) * 0.08 + 's';
 });
 
-new IntersectionObserver((entries) => {
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 }).observe
-  ? (() => {
-      const ro = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.12 });
-      revealEls.forEach(el => ro.observe(el));
-    })()
-  : revealEls.forEach(el => el.classList.add('visible')); // fallback
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObserver.observe(el));
 
 /* ---- Statement word highlight on scroll ---- */
-const statementSection = document.querySelector('.statement-section');
-const words = document.querySelectorAll('.statement-text .word');
+const statementSection = qs('.statement-section');
+const words = qsa('.statement-text .word');
 
 function highlightWords() {
   if (!statementSection) return;
@@ -117,8 +117,8 @@ function highlightWords() {
 }
 
 /* ---- 3D Tilt on project cards (pointer devices only) ---- */
-if (window.matchMedia('(pointer: fine)').matches) {
-  document.querySelectorAll('[data-tilt]').forEach(card => {
+if (isPointerFine) {
+  qsa('[data-tilt]').forEach(card => {
     card.addEventListener('mouseenter', () => { card.style.transition = 'transform 0.1s ease'; });
     card.addEventListener('mousemove', (e) => {
       const r  = card.getBoundingClientRect();
@@ -134,20 +134,20 @@ if (window.matchMedia('(pointer: fine)').matches) {
 }
 
 /* ---- Accordion ---- */
-document.querySelectorAll('.acc-head').forEach(head => {
+qsa('.acc-head').forEach(head => {
   head.addEventListener('click', () => {
     const item     = head.parentElement;
     const isActive = item.classList.contains('active');
-    document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('active'));
+    qsa('.acc-item').forEach(i => i.classList.remove('active'));
     if (!isActive) item.classList.add('active');
   });
 });
 
 /* ---- Character eye tracking (pointer only) ---- */
-const heroSection  = document.querySelector('.hero');
-const heroCharacter = document.querySelector('.hero-character');
+const heroSection   = qs('.hero');
+const heroCharacter = qs('.hero-character');
 
-if (heroSection && heroCharacter && window.matchMedia('(pointer: fine)').matches) {
+if (heroSection && heroCharacter && isPointerFine) {
   heroSection.addEventListener('mousemove', (e) => {
     const x = (e.clientX / window.innerWidth  - 0.5) * 15;
     const y = (e.clientY / window.innerHeight - 0.5) * 15;
@@ -158,34 +158,31 @@ if (heroSection && heroCharacter && window.matchMedia('(pointer: fine)').matches
   });
 }
 
-/* ---- Pager clock ---- */
-const pagerTime = document.getElementById('pager-time');
-function updatePagerClock() {
-  if (!pagerTime) return;
-  const now  = new Date();
-  let h      = now.getHours();
-  const m    = String(now.getMinutes()).padStart(2, '0');
-  const ampm = h >= 12 ? 'pm' : 'am';
-  h = h % 12 || 12;
-  pagerTime.textContent = `${h}:${m} ${ampm}`;
-}
-updatePagerClock();
-setInterval(updatePagerClock, 60000);
-
 /* ---- Smooth scroll for anchor links ---- */
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+
+  // Batman transition for contact links
+  if (link.classList.contains('contact-nav-link')) {
+    e.preventDefault();
+    triggerBatTransition(() => {
+      const target = qs(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    return;
+  }
+
+  const target = qs(link.getAttribute('href'));
+  if (target) {
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 });
 
 /* ---- Hero parallax ---- */
-const heroBgText = document.querySelector('.hero-bg-text');
-const heroText   = document.querySelector('.hero-text');
+const heroBgText = qs('.hero-bg-text');
+const heroText   = qs('.hero-text');
 function heroParallax() {
   const scroll = window.scrollY;
   if (heroBgText) heroBgText.style.transform = `translate(-50%, calc(-50% + ${scroll * 0.3}px))`;
@@ -193,39 +190,24 @@ function heroParallax() {
 }
 
 /* ---- Ticker pause on hover ---- */
-const ticker = document.querySelector('.ticker');
+const ticker = qs('.ticker');
 if (ticker) {
   ticker.addEventListener('mouseenter', () => { ticker.style.animationPlayState = 'paused'; });
   ticker.addEventListener('mouseleave', () => { ticker.style.animationPlayState = 'running'; });
 }
 
 /* ---- Intersection animations ---- */
-// Work big title
-const workBigTitle = document.querySelector('.work-big-title');
-if (workBigTitle) {
-  workBigTitle.style.cssText += 'opacity:0;transform:scale(0.8);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(0.175,0.885,0.32,1.275)';
-  new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) { workBigTitle.style.opacity='1'; workBigTitle.style.transform='scale(1)'; }
-  }, { threshold: 0.3 }).observe(workBigTitle);
+function animateOnIntersect(selector, styles, threshold = 0.3) {
+  const el = qs(selector);
+  if (!el) return;
+  Object.assign(el.style, { opacity: '0', transition: 'opacity 0.8s ease, transform 0.8s ease', ...styles.from });
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) Object.assign(el.style, styles.to);
+  }, { threshold }).observe(el);
 }
-
-// About big title
-const aboutBig = document.querySelector('.about-big');
-if (aboutBig) {
-  aboutBig.style.cssText += 'opacity:0;transform:translateX(-40px);transition:opacity 0.8s ease,transform 0.8s ease';
-  new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) { aboutBig.style.opacity='1'; aboutBig.style.transform='translateX(0)'; }
-  }, { threshold: 0.3 }).observe(aboutBig);
-}
-
-// Services big title
-const servicesBig = document.querySelector('.services-big');
-if (servicesBig) {
-  servicesBig.style.cssText += 'opacity:0;transform:translateX(-40px);transition:opacity 0.8s ease,transform 0.8s ease';
-  new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) { servicesBig.style.opacity='1'; servicesBig.style.transform='translateX(0)'; }
-  }, { threshold: 0.3 }).observe(servicesBig);
-}
+animateOnIntersect('.work-big-title', { from: { transform: 'scale(0.8)' }, to: { opacity: '1', transform: 'scale(1)' } });
+animateOnIntersect('.about-big',     { from: { transform: 'translateX(-40px)' }, to: { opacity: '1', transform: 'translateX(0)' } });
+animateOnIntersect('.services-big',  { from: { transform: 'translateX(-40px)' }, to: { opacity: '1', transform: 'translateX(0)' } });
 
 // Timeline dots
 const tlObserver = new IntersectionObserver((entries) => {
@@ -236,37 +218,23 @@ const tlObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 1 });
-document.querySelectorAll('.tl-dot').forEach(dot => {
-  dot.style.transition = 'transform 0.3s ease';
-  tlObserver.observe(dot);
-});
+qsa('.tl-dot').forEach(dot => { dot.style.transition = 'transform 0.3s ease'; tlObserver.observe(dot); });
 
 // Process steps
 const processObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    e.target.classList.toggle('show', e.isIntersecting);
-  });
+  entries.forEach(e => e.target.classList.toggle('show', e.isIntersecting));
 }, { threshold: 0.2 });
-document.querySelectorAll('.process-section .step').forEach((step, i) => {
+qsa('.process-section .step').forEach((step, i) => {
   step.style.transitionDelay = `${i * 0.12}s`;
   processObserver.observe(step);
 });
 
-/* ---- Pager screen flicker ---- */
-const pagerScreen = document.querySelector('.pager-screen');
-if (pagerScreen) {
-  setInterval(() => {
-    pagerScreen.style.opacity = '0.85';
-    setTimeout(() => { pagerScreen.style.opacity = '1'; }, 80);
-  }, 4000);
-}
-
-/* ---- Form submit ---- */
-const formSubmit = document.querySelector('.form-submit');
+/* ---- Form submit feedback ---- */
+const formSubmit = qs('.form-submit');
 if (formSubmit) {
   formSubmit.addEventListener('click', () => {
-    const inputs   = document.querySelectorAll('.form-input');
-    const hasValue = [...inputs].some(inp => inp.value.trim());
+    const inputs   = qsa('.form-input');
+    const hasValue = inputs.some(inp => inp.value.trim());
     if (hasValue) {
       formSubmit.textContent = 'Message Sent! ✓';
       formSubmit.style.background = '#22c55e';
@@ -279,13 +247,232 @@ if (formSubmit) {
   });
 }
 
-/* ---- Page load entrance ---- */
-window.addEventListener('load', () => {
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.6s ease';
-  setTimeout(() => { document.body.style.opacity = '1'; }, 50);
-});
+/* ================================================================
+   BATMAN BAT SWARM TRANSITION
+   Creates a swarm of SVG bats that fly R→L across the screen,
+   then reveals the contact section and clears.
+================================================================ */
+
+const batOverlay = document.getElementById('bat-overlay');
+const batSvg     = document.getElementById('bat-svg');
+
+// Single bat path (simplified silhouette)
+function batPath(x, y, scale) {
+  const s = scale;
+  return `
+    <g transform="translate(${x},${y}) scale(${s})" class="bat-unit">
+      <path d="
+        M 0 0
+        C -8 -6, -20 -10, -30 -5
+        C -24 -5, -18 -2, -14 4
+        C -10 2, -5 0, 0 0
+        C 5 0, 10 2, 14 4
+        C 18 -2, 24 -5, 30 -5
+        C 20 -10, 8 -6, 0 0 Z
+      " fill="rgba(0,0,0,0.85)"/>
+      <path d="M 0 0 C -2 4, -4 8, -6 10 C -2 8, 0 6, 0 0 C 0 6, 2 8, 6 10 C 4 8, 2 4, 0 0 Z" fill="rgba(0,0,0,0.7)"/>
+    </g>`;
+}
+
+function createBatSwarm() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const count = 28;
+  const bats = [];
+
+  for (let i = 0; i < count; i++) {
+    const startX = vw + 60 + Math.random() * 300;
+    const startY = Math.random() * vh;
+    const scale  = 0.6 + Math.random() * 0.8;
+    const id     = `bat-${i}`;
+
+    bats.push({ id, startX, startY, scale });
+  }
+
+  // Inject all bats
+  batSvg.innerHTML = bats.map(b => `<g id="${b.id}">${batPath(b.startX, b.startY, b.scale)}</g>`).join('');
+
+  return bats;
+}
+
+function triggerBatTransition(onComplete) {
+  if (!batOverlay) { onComplete && onComplete(); return; }
+
+  // Respect reduced-motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    onComplete && onComplete();
+    return;
+  }
+
+  batOverlay.classList.add('active');
+  const bats = createBatSwarm();
+  const vw   = window.innerWidth;
+  const duration = 1400; // ms for a bat to cross screen
+  const start    = performance.now();
+  let completed  = false;
+
+  // Use WAAPI for GPU-composited transforms
+  bats.forEach((b, i) => {
+    const el    = document.getElementById(b.id);
+    if (!el) return;
+    const delay     = i * 55;
+    const endX      = -80 - Math.random() * 200;
+    const wobbleY   = (Math.random() - 0.5) * 140;
+    const wobbleX   = b.startX + (endX - b.startX);
+    const endY      = b.startY + wobbleY;
+    const wingFlap  = 0.6 + Math.random() * 0.4; // scale flap
+
+    // Flapping via scaleY oscillation
+    el.animate([
+      { transform: `translate(${b.startX}px, ${b.startY}px) scale(${b.scale})` },
+      { transform: `translate(${b.startX + (endX - b.startX) * 0.25}px, ${b.startY - 20}px) scale(${b.scale * 1.0}) scaleY(${wingFlap})` },
+      { transform: `translate(${b.startX + (endX - b.startX) * 0.5}px, ${b.startY + 10}px) scale(${b.scale}) scaleY(1)` },
+      { transform: `translate(${b.startX + (endX - b.startX) * 0.75}px, ${endY - 15}px) scale(${b.scale}) scaleY(${wingFlap})` },
+      { transform: `translate(${endX}px, ${endY}px) scale(${b.scale})` }
+    ], {
+      duration: duration + Math.random() * 400,
+      delay,
+      easing: 'ease-in',
+      fill: 'forwards'
+    });
+  });
+
+  // When last bat finishes, scroll and clean up
+  const lastDelay = (bats.length - 1) * 55 + duration + 400;
+  setTimeout(() => {
+    if (!completed) {
+      completed = true;
+      onComplete && onComplete();
+      // Fade out overlay
+      batOverlay.style.transition = 'opacity 0.5s ease';
+      batOverlay.style.opacity = '0';
+      setTimeout(() => {
+        batOverlay.classList.remove('active');
+        batOverlay.style.opacity = '';
+        batOverlay.style.transition = '';
+        batSvg.innerHTML = '';
+      }, 500);
+    }
+  }, lastDelay);
+
+  // Halfway through, trigger scroll
+  setTimeout(() => {
+    onComplete && onComplete();
+    completed = true;
+  }, lastDelay * 0.45);
+}
 
 /* ---- Console branding ---- */
 console.log('%c KRISH_AGENT 🔴 ', 'background:#E63329;color:white;font-size:18px;padding:8px 16px;border-radius:4px;font-family:monospace;');
 console.log('%c Built with ❤️ by Krishnaa ', 'color:#E63329;font-size:12px;');
+
+/* ================================================================
+   AMBIENT BATS — contact section canvas animation
+   Bats continuously fly right→left across the contact section
+   when the section is visible.
+================================================================ */
+(function initAmbientBats() {
+  const canvas  = document.getElementById('ambientBatsCanvas');
+  const section = document.getElementById('contact');
+  if (!canvas || !section) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ctx = canvas.getContext('2d');
+  let W, H, bats = [], running = false, rafId = null;
+
+  function resize() {
+    W = canvas.width  = section.offsetWidth;
+    H = canvas.height = section.offsetHeight;
+  }
+
+  function createBat(immediate) {
+    const scale = 0.4 + Math.random() * 0.7;
+    return {
+      x: immediate ? Math.random() * W : W + 60 + Math.random() * 300,
+      y: H * 0.05 + Math.random() * H * 0.75,
+      vx: -(1.2 + Math.random() * 1.6) * (scale * 0.9),
+      vy: (Math.random() - 0.5) * 0.4,
+      scale,
+      flap: Math.random() * Math.PI * 2,
+      flapSpeed: 0.12 + Math.random() * 0.1,
+      alpha: 0.12 + Math.random() * 0.18,
+    };
+  }
+
+  function drawBat(b) {
+    ctx.save();
+    ctx.translate(b.x, b.y);
+    ctx.scale(b.scale, b.scale);
+    // Wing flap via vertical scale
+    const wingY = Math.sin(b.flap) * 0.45 + 0.55;
+    ctx.scale(1, wingY);
+    ctx.globalAlpha = b.alpha;
+    ctx.fillStyle = 'rgba(0,0,0,0.9)';
+    ctx.beginPath();
+    // Left wing
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(-8, -6, -20, -10, -30, -5);
+    ctx.bezierCurveTo(-24, -5, -18, -2, -14, 4);
+    ctx.bezierCurveTo(-10, 2, -5, 0, 0, 0);
+    // Right wing
+    ctx.bezierCurveTo(5, 0, 10, 2, 14, 4);
+    ctx.bezierCurveTo(18, -2, 24, -5, 30, -5);
+    ctx.bezierCurveTo(20, -10, 8, -6, 0, 0);
+    ctx.closePath();
+    ctx.fill();
+    // Body tail
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(-2, 4, -4, 8, -5, 11);
+    ctx.bezierCurveTo(-2, 8, 0, 6, 0, 0);
+    ctx.bezierCurveTo(0, 6, 2, 8, 5, 11);
+    ctx.bezierCurveTo(4, 8, 2, 4, 0, 0);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function tick() {
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+
+    bats.forEach(b => {
+      b.x     += b.vx;
+      b.y     += b.vy;
+      b.flap  += b.flapSpeed;
+      // Gentle sine drift
+      b.y += Math.sin(b.flap * 0.5) * 0.3;
+      drawBat(b);
+    });
+
+    // Remove off-screen bats and spawn new ones
+    bats = bats.filter(b => b.x > -100);
+    if (bats.length < 14) bats.push(createBat(false));
+
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function startBats() {
+    if (running) return;
+    running = true;
+    resize();
+    // Pre-populate with bats already on screen
+    for (let i = 0; i < 10; i++) bats.push(createBat(true));
+    tick();
+  }
+
+  function stopBats() {
+    running = false;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    ctx.clearRect(0, 0, W, H);
+    bats = [];
+  }
+
+  // Start/stop based on section visibility
+  const batObserver = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) startBats();
+    else stopBats();
+  }, { threshold: 0.05 });
+
+  batObserver.observe(section);
+  window.addEventListener('resize', () => { if (running) resize(); });
+})();

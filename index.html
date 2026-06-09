@@ -15,6 +15,13 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-dot" id="cursor-dot"></div>
 
+  <!-- Batman Bat Swarm Overlay (contact transition) -->
+  <div class="bat-overlay" id="bat-overlay" aria-hidden="true">
+    <svg class="bat-svg" id="bat-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <!-- Bats injected by JS -->
+    </svg>
+  </div>
+
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="nav-left">
@@ -26,15 +33,15 @@
     </div>
 
     <div class="nav-links" id="nav-links">
-      <a href="#home" class="nav-link active">Home</a>
-      <a href="#work" class="nav-link">Work</a>
+      <a href="#home"    class="nav-link active">Home</a>
+      <a href="#work"    class="nav-link">Work</a>
       <a href="#process" class="nav-link">How We Work</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#about"   class="nav-link">About</a>
+      <a href="#contact" class="nav-link contact-nav-link">Contact</a>
     </div>
 
     <div class="nav-right">
-      <a href="#contact" class="nav-cta">Start a Project ↗</a>
+      <a href="#contact" class="nav-cta contact-nav-link">Start a Project ↗</a>
       <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open Menu">☰</button>
     </div>
   </nav>
@@ -42,7 +49,61 @@
   <!-- ===== HERO SECTION ===== -->
   <section class="hero" id="home">
     <div class="hero-bg-text">KRISH</div>
-    
+
+    <!-- Spider-Man SVG Webs hanging from top corners -->
+    <svg class="spiderweb spiderweb-left" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g class="web-group">
+        <!-- Radial lines from corner -->
+        <line x1="0" y1="0" x2="300" y2="0"   stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="270" y2="60"  stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="220" y2="130" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="150" y2="200" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="80"  y2="260" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="20"  y2="310" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="0"   y2="340" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <!-- Concentric arcs -->
+        <path d="M 60 0 Q 40 25 0 60"   fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <path d="M 120 0 Q 90 50 40 100 Q 10 140 0 130" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <path d="M 180 0 Q 145 65 90 130 Q 45 185 0 200" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <path d="M 240 0 Q 195 80 130 165 Q 75 235 0 270" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <path d="M 290 10 Q 240 95 170 195 Q 105 280 0 330" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <!-- Hanging thread with spider -->
+        <line x1="120" y1="0" x2="118" y2="80" stroke="rgba(255,255,255,0.35)" stroke-width="0.9" class="web-thread"/>
+        <ellipse cx="118" cy="88" rx="5" ry="4" fill="rgba(255,255,255,0.5)" class="spider-body"/>
+        <line x1="112" y1="86" x2="104" y2="80" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+        <line x1="112" y1="89" x2="103" y2="86" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+        <line x1="124" y1="86" x2="132" y2="80" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+        <line x1="124" y1="89" x2="133" y2="86" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+      </g>
+    </svg>
+
+    <svg class="spiderweb spiderweb-right" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g class="web-group" transform="scale(-1,1) translate(-300,0)">
+        <line x1="0" y1="0" x2="300" y2="0"   stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="270" y2="60"  stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="220" y2="130" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="150" y2="200" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="80"  y2="260" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="20"  y2="310" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <line x1="0" y1="0" x2="0"   y2="340" stroke="rgba(255,255,255,0.18)" stroke-width="0.7"/>
+        <path d="M 60 0 Q 40 25 0 60"   fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <path d="M 120 0 Q 90 50 40 100 Q 10 140 0 130" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <path d="M 180 0 Q 145 65 90 130 Q 45 185 0 200" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <path d="M 240 0 Q 195 80 130 165 Q 75 235 0 270" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <path d="M 290 10 Q 240 95 170 195 Q 105 280 0 330" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.7"/>
+        <line x1="120" y1="0" x2="118" y2="80" stroke="rgba(255,255,255,0.35)" stroke-width="0.9" class="web-thread"/>
+        <ellipse cx="118" cy="88" rx="5" ry="4" fill="rgba(255,255,255,0.5)" class="spider-body"/>
+        <line x1="112" y1="86" x2="104" y2="80" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+        <line x1="112" y1="89" x2="103" y2="86" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+        <line x1="124" y1="86" x2="132" y2="80" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+        <line x1="124" y1="89" x2="133" y2="86" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+      </g>
+    </svg>
+
+    <!-- Web-shooting arc (ambient) -->
+    <svg class="web-shoot" id="web-shoot" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path class="web-shoot-path" d="M 380 10 Q 200 80 20 180" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.2" stroke-dasharray="400" stroke-dashoffset="400"/>
+    </svg>
 
     <div class="character-wrap">
       <img src="images/krish.png" alt="Krish" class="hero-character">
@@ -51,18 +112,18 @@
         <span>Accepting Projects</span>
       </div>
     </div>
-<div class="web web-left"></div>
-<div class="web web-right"></div>
-<div class="web web-side-left"></div>
-<div class="web web-side-right"></div>
+
+    <!-- Web.png — white-filtered with entrance animation -->
+    <img src="images/web.png" alt="" class="web-img web-img-left"  aria-hidden="true">
+    <img src="images/web.png" alt="" class="web-img web-img-right" aria-hidden="true">
 
     <div class="hero-text">
       <p class="hero-sub">HI, I'M KRISH 👋</p>
       <h1 class="hero-title">WE BUILD<br/><span class="hero-accent">WEBS.</span></h1>
       <p class="hero-desc">We help businesses establish a professional online presence through modern, fast, and mobile-friendly websites.</p>
       <div class="hero-btns">
-        <a href="#work" class="btn-primary">View Work</a>
-        <a href="#contact" class="btn-secondary">Start a Project</a>
+        <a href="#work"    class="btn-primary">View Work</a>
+        <a href="#contact" class="btn-secondary contact-nav-link">Start a Project</a>
       </div>
       <div class="hero-tags">
         <span>📱 Mobile Responsive</span>
@@ -74,18 +135,10 @@
 
     <div class="ticker-wrap">
       <div class="ticker">
-        <span>WE BUILD WEBS✦</span>
-        <span>CUSTOM DESIGN✦</span>
-        <span>FAST LOADING✦</span>
-        <span>SEO OPTIMISED✦</span>
-        <span>MOBILE FIRST✦</span>
-        <span>ELITE UI/UX✦</span>
-        <span>WE BUILD WEBS✦</span>
-        <span>CUSTOM DESIGN✦</span>
-        <span>FAST LOADING✦</span>
-        <span>SEO OPTIMISED✦</span>
-        <span>MOBILE FIRST✦</span>
-        <span>ELITE UI/UX✦</span>
+        <span>WE BUILD WEBS✦</span><span>CUSTOM DESIGN✦</span><span>FAST LOADING✦</span>
+        <span>SEO OPTIMISED✦</span><span>MOBILE FIRST✦</span><span>ELITE UI/UX✦</span>
+        <span>WE BUILD WEBS✦</span><span>CUSTOM DESIGN✦</span><span>FAST LOADING✦</span>
+        <span>SEO OPTIMISED✦</span><span>MOBILE FIRST✦</span><span>ELITE UI/UX✦</span>
       </div>
     </div>
   </section>
@@ -123,17 +176,12 @@
         <div class="project-img project-img-1">
           <div class="proj-mockup">
             <div class="mockup-bar"></div>
-            <div class="mockup-content cafe-mock">
-              <span>☕</span>
-              <p>CAFÉ</p>
-            </div>
+            <div class="mockup-content cafe-mock"><span>☕</span><p>CAFÉ</p></div>
           </div>
         </div>
         <div class="project-info">
           <div class="proj-tags">
-            <span class="tag">HOSPITALITY</span>
-            <span class="tag">WEB DESIGN</span>
-            <span class="tag">3 MIN READ</span>
+            <span class="tag">HOSPITALITY</span><span class="tag">WEB DESIGN</span><span class="tag">3 MIN READ</span>
           </div>
           <h4>Café Website</h4>
           <p>Modern website for cafés, bakeries and coffee shops.</p>
@@ -149,17 +197,12 @@
         <div class="project-img project-img-2">
           <div class="proj-mockup">
             <div class="mockup-bar"></div>
-            <div class="mockup-content academy-mock">
-              <span>🎓</span>
-              <p>ACADEMY</p>
-            </div>
+            <div class="mockup-content academy-mock"><span>🎓</span><p>ACADEMY</p></div>
           </div>
         </div>
         <div class="project-info">
           <div class="proj-tags">
-            <span class="tag">EDUCATION</span>
-            <span class="tag">APP</span>
-            <span class="tag">5 MIN READ</span>
+            <span class="tag">EDUCATION</span><span class="tag">APP</span><span class="tag">5 MIN READ</span>
           </div>
           <h4>Academy Website</h4>
           <p>Professional website for schools and educational institutions.</p>
@@ -175,17 +218,12 @@
         <div class="project-img project-img-3">
           <div class="proj-mockup">
             <div class="mockup-bar"></div>
-            <div class="mockup-content biz-mock">
-              <span>💼</span>
-              <p>BUSINESS</p>
-            </div>
+            <div class="mockup-content biz-mock"><span>💼</span><p>BUSINESS</p></div>
           </div>
         </div>
         <div class="project-info">
           <div class="proj-tags">
-            <span class="tag">BUSINESS</span>
-            <span class="tag">LEADS</span>
-            <span class="tag">4 MIN READ</span>
+            <span class="tag">BUSINESS</span><span class="tag">LEADS</span><span class="tag">4 MIN READ</span>
           </div>
           <h4>Business Website</h4>
           <p>Lead generation website for local businesses.</p>
@@ -201,17 +239,12 @@
         <div class="project-img project-img-4">
           <div class="proj-mockup">
             <div class="mockup-bar"></div>
-            <div class="mockup-content ecom-mock">
-              <span>🛍</span>
-              <p>E-COMMERCE</p>
-            </div>
+            <div class="mockup-content ecom-mock"><span>🛍</span><p>E-COMMERCE</p></div>
           </div>
         </div>
         <div class="project-info">
           <div class="proj-tags">
-            <span class="tag">E-COMMERCE</span>
-            <span class="tag">STORE</span>
-            <span class="tag">6 MIN READ</span>
+            <span class="tag">E-COMMERCE</span><span class="tag">STORE</span><span class="tag">6 MIN READ</span>
           </div>
           <h4>E-Commerce Store</h4>
           <p>Online store with products, payments and checkout.</p>
@@ -233,40 +266,20 @@
       <p class="services-sub">As a web studio, we are digital craftsmen — building experiences that connect deeply and convert visitors into customers.</p>
       <div class="accordion">
         <div class="acc-item active">
-          <div class="acc-head">
-            <span>Custom Web Design</span>
-            <span class="acc-icon">↓</span>
-          </div>
-          <div class="acc-body">
-            <p>Every website is uniquely designed to match your brand identity. No templates — built from scratch with elite UI/UX.</p>
-          </div>
+          <div class="acc-head"><span>Custom Web Design</span><span class="acc-icon">↓</span></div>
+          <div class="acc-body"><p>Every website is uniquely designed to match your brand identity. No templates — built from scratch with elite UI/UX.</p></div>
         </div>
         <div class="acc-item">
-          <div class="acc-head">
-            <span>E-Commerce Stores</span>
-            <span class="acc-icon">↓</span>
-          </div>
-          <div class="acc-body">
-            <p>Full online stores with product listings, cart, payments integration, and order management — ready to sell.</p>
-          </div>
+          <div class="acc-head"><span>E-Commerce Stores</span><span class="acc-icon">↓</span></div>
+          <div class="acc-body"><p>Full online stores with product listings, cart, payments integration, and order management — ready to sell.</p></div>
         </div>
         <div class="acc-item">
-          <div class="acc-head">
-            <span>SEO Optimisation</span>
-            <span class="acc-icon">↓</span>
-          </div>
-          <div class="acc-body">
-            <p>Built with SEO best practices so your business ranks on Google and attracts organic traffic from day one.</p>
-          </div>
+          <div class="acc-head"><span>SEO Optimisation</span><span class="acc-icon">↓</span></div>
+          <div class="acc-body"><p>Built with SEO best practices so your business ranks on Google and attracts organic traffic from day one.</p></div>
         </div>
         <div class="acc-item">
-          <div class="acc-head">
-            <span>Mobile-First Development</span>
-            <span class="acc-icon">↓</span>
-          </div>
-          <div class="acc-body">
-            <p>Responsive across all devices — phones, tablets, laptops, and desktops — with smooth performance.</p>
-          </div>
+          <div class="acc-head"><span>Mobile-First Development</span><span class="acc-icon">↓</span></div>
+          <div class="acc-body"><p>Responsive across all devices — phones, tablets, laptops, and desktops — with smooth performance.</p></div>
         </div>
       </div>
     </div>
@@ -278,9 +291,7 @@
               <div class="screen-content">
                 <div class="screen-nav"></div>
                 <div class="screen-hero-bar"></div>
-                <div class="screen-text-lines">
-                  <div></div><div></div><div></div>
-                </div>
+                <div class="screen-text-lines"><div></div><div></div><div></div></div>
               </div>
             </div>
             <div class="monitor-stand"></div>
@@ -296,41 +307,11 @@
     <h2 class="section-title">How We Build Webs</h2>
     <p class="section-sub">A simple process from idea to launch.</p>
     <div class="process-steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <h4>Understanding Your Business</h4>
-          <p>We learn about your business, goals, audience, and services to ensure the website reflects your brand.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-content">
-          <h4>Planning The Experience</h4>
-          <p>We organize content, pages, and user experience to create a website that is clear and focused on your objectives.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-content">
-          <h4>Bringing It To Life</h4>
-          <p>We build a modern, responsive website that looks professional and performs smoothly across all devices.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-content">
-          <h4>Review & Refine</h4>
-          <p>You review and provide feedback. We make adjustments until everything meets your expectations perfectly.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">05</div>
-        <div class="step-content">
-          <h4>Launch & Support</h4>
-          <p>Once approved, we publish your website and provide guidance on managing and growing your online presence.</p>
-        </div>
-      </div>
+      <div class="step"><div class="step-num">01</div><div class="step-content"><h4>Understanding Your Business</h4><p>We learn about your business, goals, audience, and services to ensure the website reflects your brand.</p></div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-content"><h4>Planning The Experience</h4><p>We organize content, pages, and user experience to create a website that is clear and focused on your objectives.</p></div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-content"><h4>Bringing It To Life</h4><p>We build a modern, responsive website that looks professional and performs smoothly across all devices.</p></div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-content"><h4>Review & Refine</h4><p>You review and provide feedback. We make adjustments until everything meets your expectations perfectly.</p></div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-content"><h4>Launch & Support</h4><p>Once approved, we publish your website and provide guidance on managing and growing your online presence.</p></div></div>
     </div>
   </section>
 
@@ -339,26 +320,10 @@
     <div class="section-label">✦ Why Work With Us</div>
     <h2 class="section-title">Websites built for real businesses.</h2>
     <div class="why-grid">
-      <div class="why-card">
-        <span class="why-icon">⚡</span>
-        <h4>Fast Performance</h4>
-        <p>Websites optimized for speed and a smooth browsing experience.</p>
-      </div>
-      <div class="why-card">
-        <span class="why-icon">📱</span>
-        <h4>Mobile Friendly</h4>
-        <p>Looks great on phones, tablets, laptops, and desktops.</p>
-      </div>
-      <div class="why-card">
-        <span class="why-icon">🎨</span>
-        <h4>Custom Built</h4>
-        <p>Every website is designed specifically for your business.</p>
-      </div>
-      <div class="why-card">
-        <span class="why-icon">🔒</span>
-        <h4>Reliable & Professional</h4>
-        <p>A polished online presence that helps customers trust your brand.</p>
-      </div>
+      <div class="why-card"><span class="why-icon">⚡</span><h4>Fast Performance</h4><p>Websites optimized for speed and a smooth browsing experience.</p></div>
+      <div class="why-card"><span class="why-icon">📱</span><h4>Mobile Friendly</h4><p>Looks great on phones, tablets, laptops, and desktops.</p></div>
+      <div class="why-card"><span class="why-icon">🎨</span><h4>Custom Built</h4><p>Every website is designed specifically for your business.</p></div>
+      <div class="why-card"><span class="why-icon">🔒</span><h4>Reliable & Professional</h4><p>A polished online presence that helps customers trust your brand.</p></div>
     </div>
   </section>
 
@@ -370,20 +335,11 @@
       <p class="about-desc">I'm <strong>Krishnaa</strong>. Recently completed my Master of Computer Applications with a CGPA of 9.44. I'm an aspiring Data Analyst who enjoys working with Python, SQL, data visualization, and analytics. Beyond data, I love building websites, developing projects, and bringing ideas to life through technology.</p>
       <p class="about-desc" style="margin-top:1rem;">The red theme throughout this website is inspired by my love for Manchester United and Spider-Man.</p>
       <div class="about-stats">
-        <div class="about-stat">
-          <strong>9.44</strong>
-          <small>MCA CGPA</small>
-        </div>
-        <div class="about-stat">
-          <strong>MCA</strong>
-          <small>Qualification</small>
-        </div>
-        <div class="about-stat">
-          <strong>∞</strong>
-          <small>Ideas Built</small>
-        </div>
+        <div class="about-stat"><strong>9.44</strong><small>MCA CGPA</small></div>
+        <div class="about-stat"><strong>MCA</strong><small>Qualification</small></div>
+        <div class="about-stat"><strong>∞</strong><small>Ideas Built</small></div>
       </div>
-      <a href="#contact" class="btn-primary" style="display:inline-flex;margin-top:2rem;">Contact Me ↗</a>
+      <a href="#contact" class="btn-primary contact-nav-link" style="display:inline-flex;margin-top:2rem;">Contact Me ↗</a>
     </div>
     <div class="about-right">
       <div class="about-photo-card">
@@ -399,128 +355,94 @@
   <!-- ===== TIMELINE ===== -->
   <section class="timeline-section">
     <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">2021</div>
-        <div class="tl-dot"></div>
-        <div class="tl-text">Started B.Sc Computer Science and discovered my passion for technology.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2024</div>
-        <div class="tl-dot"></div>
-        <div class="tl-text">Graduated with a CGPA of 8.18 and strengthened my technical foundation.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2026</div>
-        <div class="tl-dot"></div>
-        <div class="tl-text">Completed MCA with a CGPA of 9.44 and sharpened my analytical skills.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">Today</div>
-        <div class="tl-dot active"></div>
-        <div class="tl-text">Building projects and pursuing opportunities in Data Analytics.</div>
-      </div>
+      <div class="tl-item"><div class="tl-year">2021</div><div class="tl-dot"></div><div class="tl-text">Started B.Sc Computer Science and discovered my passion for technology.</div></div>
+      <div class="tl-item"><div class="tl-year">2024</div><div class="tl-dot"></div><div class="tl-text">Graduated with a CGPA of 8.18 and strengthened my technical foundation.</div></div>
+      <div class="tl-item"><div class="tl-year">2026</div><div class="tl-dot"></div><div class="tl-text">Completed MCA with a CGPA of 9.44 and sharpened my analytical skills.</div></div>
+      <div class="tl-item"><div class="tl-year">Today</div><div class="tl-dot active"></div><div class="tl-text">Building projects and pursuing opportunities in Data Analytics.</div></div>
     </div>
   </section>
 
   <!-- ===== CONTACT ===== -->
   <section class="contact-section" id="contact">
-  <section class="batman-divider">
-  <img src="images/Batman.png" alt="Batman" class="batman-img">
-</section>
-    <div class="contact-bg-text">CONTACT</div>
+    <!-- Ambient bats canvas -->
+    <canvas class="ambient-bats-canvas" id="ambientBatsCanvas" aria-hidden="true"></canvas>
 
-<div class="contact-card">
+    <!-- Batman logo divider -->
+    <div class="batman-divider">
+      <div class="batman-logo-wrap">
+        <img src="images/Batman.png" alt="Batman Logo" class="batman-img">
+        <div class="batman-glow-ring"></div>
+      </div>
+    </div>
 
-    <div class="contact-card-top">
+    <div class="contact-card">
+      <div class="contact-card-top">
         <span class="status-dot"></span>
         <span>Available for Projects</span>
+      </div>
+      <h3>Let's Build Something Great.</h3>
+      <p>Need a website, landing page, portfolio, or business site? Reach out through any of the platforms below.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/sreekrishnaak/" target="_blank" class="contact-link">LinkedIn ↗</a>
+        <a href="https://wa.me/9655402966" target="_blank" class="contact-link">WhatsApp ↗</a>
+        <a href="mailto:sreekrishnaa@gmail.com" class="contact-link primary">Email Me ↗</a>
+      </div>
     </div>
 
-    <h3>Let's Build Something Great.</h3>
+    <div class="contact-bg-text">CONTACT</div>
 
-    <p>
-        Need a website, landing page, portfolio, or business site?
-        Reach out through any of the platforms below.
-    </p>
-
-    <div class="contact-links">
-
-        <a href="https://www.linkedin.com/in/sreekrishnaak/"
-           target="_blank"
-           class="contact-link">
-            LinkedIn ↗
-        </a>
-
-        <a href="https://wa.me/9655402966"
-           target="_blank"
-           class="contact-link">
-            WhatsApp ↗
-        </a>
-
-        <a href="mailto:sreekrishnaa@gmail.com"
-           class="contact-link primary">
-            Email Me ↗
-        </a>
-
+    <div class="contact-form-wrap">
+      <div class="section-label" style="color:#f0c070;">✦ START A PROJECT</div>
+      <h2 class="contact-title">Let's build your<br/><span>online presence.</span></h2>
+      <p class="contact-sub">Tell us about your project — I'll get back within 24 hours.</p>
+      <form class="contact-form" action="https://formspree.io/f/xbdeolkp" method="POST">
+        <div class="form-row">
+          <input type="text"  name="name"     placeholder="Your Name"       class="form-input" required />
+          <input type="text"  name="business" placeholder="Business / Brand" class="form-input" />
+        </div>
+        <div class="form-row">
+          <input type="email" name="email"    placeholder="Email Address"    class="form-input" required />
+          <input type="tel"   name="phone"    placeholder="Contact Number"   class="form-input" />
+        </div>
+        <textarea name="message" class="form-input form-textarea" placeholder="Tell me about your project, goals, budget, and timeline..." required></textarea>
+        <button type="submit" class="btn-primary form-submit">Send Project Details ↗</button>
+      </form>
     </div>
 
-</div>
-<div class="contact-form-wrap">
-  <div class="section-label" style="color:#f0c070;">✦ START A PROJECT</div>
-  <h2 class="contact-title">Let's build your<br/><span>online presence.</span></h2>
-  <p class="contact-sub">Tell us about your project — I'll get back within 24 hours.</p>
-
-  <form
-    class="contact-form"
-    action="https://formspree.io/f/xbdeolkp"
-    method="POST"
-  >
-    <div class="form-row">
-      <input
-        type="text"
-        name="name"
-        placeholder="Your Name"
-        class="form-input"
-        required
-      />
-
-      <input
-        type="text"
-        name="business"
-        placeholder="Business / Brand"
-        class="form-input"
-      />
+    <!-- Batman footer silhouette -->
+    <div class="batman-footer-silhouette" aria-hidden="true">
+      <svg viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="batman-city-svg">
+        <!-- Gotham City skyline left -->
+        <rect x="0"   y="70" width="40"  height="50" fill="rgba(0,0,0,0.25)"/>
+        <rect x="45"  y="50" width="25"  height="70" fill="rgba(0,0,0,0.25)"/>
+        <rect x="75"  y="60" width="35"  height="60" fill="rgba(0,0,0,0.25)"/>
+        <rect x="115" y="40" width="20"  height="80" fill="rgba(0,0,0,0.25)"/>
+        <rect x="140" y="55" width="30"  height="65" fill="rgba(0,0,0,0.25)"/>
+        <rect x="175" y="35" width="22"  height="85" fill="rgba(0,0,0,0.25)"/>
+        <polygon points="186,35 192,10 198,35"        fill="rgba(0,0,0,0.25)"/>
+        <rect x="202" y="65" width="45"  height="55" fill="rgba(0,0,0,0.25)"/>
+        <rect x="253" y="45" width="28"  height="75" fill="rgba(0,0,0,0.25)"/>
+        <rect x="286" y="70" width="20"  height="50" fill="rgba(0,0,0,0.25)"/>
+        <!-- Batman logo centered in gap (x=306 to x=460, center=383) -->
+        <image href="images/Batman.png" x="303" y="18" width="154" height="90"
+               opacity="0.28" style="filter: brightness(0) invert(1);"
+               class="batman-svg-logo"/>
+        <!-- Bat signal glow on ground -->
+        <ellipse cx="383" cy="116" rx="80" ry="8" fill="rgba(255,220,0,0.10)"/>
+        <!-- Gotham City skyline right -->
+        <rect x="460" y="70" width="20"  height="50" fill="rgba(0,0,0,0.25)"/>
+        <rect x="486" y="50" width="28"  height="70" fill="rgba(0,0,0,0.25)"/>
+        <rect x="520" y="45" width="35"  height="75" fill="rgba(0,0,0,0.25)"/>
+        <rect x="560" y="30" width="22"  height="90" fill="rgba(0,0,0,0.25)"/>
+        <polygon points="571,30 577,8 583,30"         fill="rgba(0,0,0,0.25)"/>
+        <rect x="588" y="55" width="40"  height="65" fill="rgba(0,0,0,0.25)"/>
+        <rect x="633" y="60" width="30"  height="60" fill="rgba(0,0,0,0.25)"/>
+        <rect x="668" y="45" width="25"  height="75" fill="rgba(0,0,0,0.25)"/>
+        <rect x="698" y="70" width="40"  height="50" fill="rgba(0,0,0,0.25)"/>
+        <rect x="743" y="55" width="30"  height="65" fill="rgba(0,0,0,0.25)"/>
+        <rect x="778" y="65" width="22"  height="55" fill="rgba(0,0,0,0.25)"/>
+      </svg>
     </div>
-
-    <div class="form-row">
-      <input
-        type="email"
-        name="email"
-        placeholder="Email Address"
-        class="form-input"
-        required
-      />
-
-      <input
-        type="tel"
-        name="phone"
-        placeholder="Contact Number"
-        class="form-input"
-      />
-    </div>
-
-    <textarea
-      name="message"
-      class="form-input form-textarea"
-      placeholder="Tell me about your project, goals, budget, and timeline..."
-      required
-    ></textarea>
-
-    <button type="submit" class="btn-primary form-submit">
-      Send Project Details ↗
-    </button>
-  </form>
-</div>
 
     <div class="footer-nav">
       <a href="#home">Home</a>
