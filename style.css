@@ -712,156 +712,361 @@ letter-spacing: 0.02em;
   overflow: hidden;
   padding: 0 60px 60px;
 }
-.contact-cloud-top {
-  width: 100%;
-  height: 100px;
-  background: var(--black);
-  border-radius: 0 0 50% 50% / 0 0 80px 80px;
-  position: relative;
-  z-index: 1;
-}
-.contact-bg-text {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  font-family: var(--font-display);
-  font-size: clamp(50px, 10vw, 160px);
-  color: rgba(100,10,10,0.4);
-  white-space: nowrap;
-  pointer-events: none;
-  letter-spacing: 0.05em;
-  z-index: 0;
-}
-.contact-pager {
-  background: #1a1a1a;
-  border-radius: 24px;
-  padding: 20px;
-  width: min(420px, 100%);
-  margin: 60px auto 0;
-  position: relative;
-  z-index: 2;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
-}
-.contact-card{
-max-width:700px;
-margin:60px auto 0;
-background:rgba(0,0,0,0.25);
-border:1px solid rgba(255,255,255,0.1);
-border-radius:24px;
-padding:40px;
-backdrop-filter:blur(20px);
+/* =========================
+   BATMAN DIVIDER
+========================= */
+
+/* =========================
+   BATMAN DIVIDER
+========================= */
+
+.batman-divider{
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px 0 0;
 position:relative;
 z-index:2;
 }
 
+.batman-img{
+width:min(450px,70vw);
+height:auto;
+display:block;
+filter:drop-shadow(0 20px 40px rgba(0,0,0,.35));
+animation:batFloat 4s ease-in-out infinite;
+}
+
+@keyframes batFloat{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-10px);
+}
+}
+
+/* =========================
+   CONTACT SECTION
+========================= */
+
+.contact-section{
+    position:relative;
+    overflow:hidden;
+    background:var(--red);
+    padding:40px 24px 100px;
+}
+
+/* CONTACT background text */
+
+.contact-bg-text{
+    position:absolute;
+    top:520px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:var(--font-display);
+    font-size:clamp(120px,18vw,260px);
+    line-height:1;
+    color:rgba(0,0,0,.10);
+    white-space:nowrap;
+    pointer-events:none;
+    z-index:0;
+    letter-spacing:.05em;
+}
+
+/* =========================
+   CONTACT CARD
+========================= */
+
+.contact-card{
+    max-width:760px;
+    margin:-40px auto 100px;
+    padding:48px;
+
+    background:rgba(120,20,20,.45);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:32px;
+
+    box-shadow:
+    0 30px 80px rgba(0,0,0,.25),
+    0 10px 30px rgba(0,0,0,.15);
+
+    position:relative;
+    z-index:3;
+    overflow:hidden;
+}
+
+.contact-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at top center,
+        rgba(255,255,255,.06),
+        transparent 60%
+    );
+
+    pointer-events:none;
+}
+
+.contact-card > *{
+    position:relative;
+    z-index:2;
+}
+
 .contact-card-top{
-display:flex;
-align-items:center;
-gap:10px;
-font-size:0.9rem;
-color:rgba(255,255,255,0.7);
-margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+    color:rgba(255,255,255,.85);
+}
+
+.status-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#2ecc71;
 }
 
 .contact-card h3{
-font-size:2rem;
-margin-bottom:15px;
+    font-size:clamp(40px,4vw,58px);
+    line-height:1.05;
+    margin-bottom:18px;
+    font-family:var(--font-display);
+    color:#fff;
 }
 
 .contact-card p{
-color:rgba(255,255,255,0.7);
-line-height:1.7;
-margin-bottom:30px;
+    color:rgba(255,255,255,.85);
+    line-height:1.7;
+    margin-bottom:28px;
 }
 
+/* BUTTONS */
+
 .contact-links{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
 }
 
 .contact-link{
-padding:12px 20px;
-border-radius:999px;
-text-decoration:none;
-background:#1a1a1a;
-color:#fff;
-font-weight:600;
-transition:.3s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 28px;
+
+    border-radius:999px;
+
+    background:#111;
+    color:#fff;
+
+    text-decoration:none;
+    font-weight:700;
+    font-size:.95rem;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.3s ease;
 }
 
 .contact-link:hover{
-transform:translateY(-2px);
+    transform:translateY(-3px);
+    background:#000;
+    box-shadow:0 12px 24px rgba(0,0,0,.25);
 }
 
 .contact-link.primary{
-background:#f0c070;
-color:#000;
+    background:#f0c070;
+    color:#111;
+    border:none;
 }
-.pager-status { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 12px; opacity: 0.7; }
-.pager-message p { font-size: 0.8rem; margin-bottom: 6px; text-align: center; }
-.pager-message strong { font-size: 0.95rem; display: block; text-align: center; font-weight: 700; word-break: break-all; }
-.pager-brand { font-size: 0.7rem; opacity: 0.6; margin-top: 10px; }
-.pager-buttons { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
-.pager-btn {
-  background: #2a2a2a;
-  color: var(--white);
-  padding: 10px 16px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  cursor: pointer;
-}
-.pager-btn:hover { background: #3a3a3a; }
-.pager-btn-primary { background: var(--cream); color: var(--black); font-weight: 700; }
-.pager-btn-primary:hover { background: var(--cream-light); }
 
-/* Contact Form */
-.contact-form-wrap {
-  max-width: 800px;
-  margin: 60px auto 0;
-  position: relative;
-  z-index: 2;
+.contact-link.primary:hover{
+    background:#ffd27d;
 }
+
+/* =========================
+   TITLE AREA
+========================= */
+
+.contact-form-wrap{
+    position:relative;
+    z-index:2;
+    max-width:740px;
+    margin:0 auto;
+    text-align:center;
+}
+
 .contact-title{
-font-family: var(--font-display);
-font-size: clamp(32px, 5vw, 68px);
-line-height: 0.95;
-color: var(--white);
-margin: 12px 0 16px;
-letter-spacing: 0.01em;
+    display:inline-block;
+
+    font-family:var(--font-display);
+    font-size:clamp(36px,5vw,72px);
+    line-height:.95;
+
+    color:var(--white);
+
+    background:#111;
+    padding:20px 30px;
+
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+    margin:12px 0 18px;
 }
 
 .contact-title span{
-color: transparent;
--webkit-text-stroke: 1.2px var(--white);
-font-weight: 400;
+    color:var(--black);
+    -webkit-text-stroke:2px var(--white);
 }
 
-.contact-title span { color: var(--black); -webkit-text-stroke: 2px var(--white); }
-.contact-sub { color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 36px; }
-.contact-form { display: flex; flex-direction: column; gap: 14px; }
-.form-row { display: flex; gap: 14px; }
-.form-input {
-  flex: 1;
-  background: rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: var(--white);
-  padding: 14px 18px;
-  border-radius: 12px;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  outline: none;
-  transition: border-color 0.2s;
-  width: 100%;
-  cursor: text;
+.contact-sub{
+    color:rgba(255,255,255,.8);
+    margin-bottom:36px;
+    font-size:1rem;
 }
-.form-input::placeholder { color: rgba(255,255,255,0.4); }
-.form-input:focus { border-color: var(--white); }
-.form-textarea { height: 130px; resize: vertical; }
-.form-submit { align-self: flex-start; }
+
+/* =========================
+   FORM
+========================= */
+
+.contact-form{
+    position:relative;
+
+    background:rgba(0,0,0,.20);
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    padding:32px;
+    border-radius:24px;
+
+    overflow:hidden;
+}
+
+/* Batman watermark */
+
+.contact-form::after{
+    content:"";
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:260px;
+    height:260px;
+
+    background:url("images/Batman.png") center/contain no-repeat;
+
+    opacity:.06;
+
+    pointer-events:none;
+}
+
+.contact-form > *{
+    position:relative;
+    z-index:2;
+}
+
+.form-row{
+    display:flex;
+    gap:14px;
+    margin-bottom:14px;
+}
+
+.form-input{
+    flex:1;
+    width:100%;
+
+    background:rgba(0,0,0,.25);
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+
+    padding:14px 18px;
+
+    font-size:.95rem;
+    color:#fff;
+
+    outline:none;
+    transition:.3s;
+}
+
+.form-input::placeholder{
+    color:rgba(255,255,255,.45);
+}
+
+.form-input:focus{
+    border-color:#f0c070;
+    box-shadow:0 0 20px rgba(240,192,112,.15);
+}
+
+.form-textarea{
+    height:130px;
+    resize:vertical;
+}
+
+.form-submit{
+    margin-top:10px;
+    align-self:flex-start;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:768px){
+
+    .contact-bg-text{
+        font-size:90px;
+        top:260px;
+    }
+
+    .form-row{
+        flex-direction:column;
+    }
+
+    .contact-form{
+        padding:24px;
+    }
+
+    .contact-title{
+        font-size:clamp(32px,10vw,52px);
+        padding:16px 20px;
+    }
+
+    .contact-title span{
+        -webkit-text-stroke:1px var(--white);
+    }
+
+    .batman-img{
+        width:280px;
+    }
+
+    .contact-card{
+        padding:32px 24px;
+    }
+
+    .contact-links{
+        flex-direction:column;
+    }
+
+    .contact-link{
+        width:100%;
+    }
+}
 
 /* Footer */
 .footer-nav {
@@ -1093,34 +1298,102 @@ cursor:auto !important;
 }
 
 }
+/* =========================
+   SPIDER WEB DECORATIONS
+========================= */
 
+.web{
+position:absolute;
+pointer-events:none;
+z-index:2;
+background-image:url("images/web.png");
+background-repeat:no-repeat;
+background-size:contain;
+background-position:center;
+filter:brightness(0);
+}
+
+/* Top Left */
+.web-left{
+width:320px;
+height:320px;
+top:-30px;
+left:-30px;
+opacity:.22;
+animation:webPulse 8s ease-in-out infinite;
+}
+
+/* Top Right */
+.web-right{
+width:320px;
+height:320px;
+top:-30px;
+right:-30px;
+transform:scaleX(-1);
+opacity:.22;
+animation:webPulse 8s ease-in-out infinite reverse;
+}
+
+/* Side Accent Left */
+.web-side-left{
+width:120px;
+height:120px;
+top:50%;
+left:-60px;
+transform:translateY(-50%) rotate(40deg);
+opacity:.08;
+}
+
+/* Side Accent Right */
+.web-side-right{
+width:120px;
+height:120px;
+top:50%;
+right:-60px;
+transform:translateY(-50%) scaleX(-1) rotate(40deg);
+opacity:.08;
+}
+
+@keyframes webPulse{
+0%,100%{
+opacity:.18;
+}
+50%{
+opacity:.28;
+}
+}
+
+/* Mobile */
 @media (max-width:768px){
 
-.contact-card{
-padding:24px;
+.web-left,
+.web-right{
+width:180px;
+height:180px;
+opacity:.15;
 }
 
-.contact-links{
-flex-direction:column;
+.web-left{
+top:-20px;
+left:-20px;
 }
 
-.contact-link{
-text-align:center;
+.web-right{
+top:-20px;
+right:-20px;
 }
 
-}
-@media (max-width:768px){
-
-.contact-title{
-font-size: clamp(32px, 10vw, 52px);
-}
-
-.contact-title span{
--webkit-text-stroke: 1px var(--white);
+.web-side-left,
+.web-side-right{
+display:none;
 }
 
 }
-@media (max-width:768px){
+/* =========================
+   PHONE ONLY HERO CLEANUP
+========================= */
+
+@media (max-width:480px){
 
 .hero-sub,
 .character-wrap{
@@ -1128,7 +1401,9 @@ display:none !important;
 }
 
 .hero{
+min-height:100vh;
 justify-content:center;
+padding:90px 16px 60px;
 }
 
 .hero-text{
@@ -1140,17 +1415,6 @@ max-width:100%;
 .hero-btns,
 .hero-tags{
 justify-content:center;
-}
-
-}
-@media (max-width:768px){
-
-.cloud,
-.cloud-left,
-.cloud-right,
-.cloud-bottom-left,
-.cloud-bottom-right{
-display:none !important;
 }
 
 }
