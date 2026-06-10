@@ -1,0 +1,865 @@
+/* =========================
+   GOOGLE FONTS
+========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+/* =========================
+   ROOT VARIABLES
+========================= */
+
+:root{
+    --black: #000000ff;
+    --dim-grey: #66666eff;
+    --rosy-granite: #9999a1ff;
+    --alabaster-grey: #e6e6e9ff;
+    --platinum: #f4f4f6ff;
+
+    --favorite-red: #d62828;
+
+    --transition: all 0.3s ease;
+}
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: "Inter", sans-serif;
+
+    background: var(--black);
+
+    color: var(--platinum);
+
+    overflow-x: hidden;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+header{
+    position: fixed;
+
+    top: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 92%;
+    max-width: 1400px;
+
+    z-index: 1000;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 2rem;
+
+    background: rgba(0,0,0,0.8);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 24px;
+}
+
+.logo{
+    font-family: "Playfair Display", serif;
+
+    font-size: 2rem;
+
+    color: var(--platinum);
+}
+
+.nav-links{
+    display: flex;
+
+    gap: 2rem;
+}
+
+.nav-links a{
+    color: var(--platinum);
+
+    position: relative;
+
+    font-weight: 500;
+}
+
+.nav-links a::after{
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--platinum);
+
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links .active::after{
+    width: 100%;
+}
+
+.nav-toggle{
+    display: none;
+}
+
+/* =========================
+   MENU PAGE LAYOUT
+========================= */
+
+.menu-page{
+    display: grid;
+
+    grid-template-columns: 60% 40%;
+
+    gap: 5rem;
+
+    padding: 10rem 8% 6rem;
+}
+
+/* =========================
+   MENU CONTENT
+========================= */
+
+.menu-content{
+    max-width: 850px;
+}
+
+.section-tag{
+    display: inline-block;
+
+    margin-bottom: 1rem;
+
+    color: var(--rosy-granite);
+
+    letter-spacing: 4px;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+}
+
+.menu-heading{
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(3rem, 5vw, 5rem);
+
+    line-height: 1.05;
+
+    margin-bottom: 2rem;
+}
+
+.menu-intro{
+    max-width: 700px;
+
+    color: var(--rosy-granite);
+
+    line-height: 1.9;
+
+    margin-bottom: 5rem;
+}
+
+/* =========================
+   MENU SECTIONS
+========================= */
+
+.menu-section{
+    margin-bottom: 4rem;
+}
+
+.menu-section.show{
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.menu-section h2{
+    font-family: "Playfair Display", serif;
+
+    font-size: 2rem;
+
+    margin-bottom: 0.75rem;
+}
+
+.separator{
+    color: var(--dim-grey);
+
+    margin-bottom: 1.5rem;
+
+    letter-spacing: 2px;
+}
+
+/* =========================
+   MENU ITEMS
+========================= */
+
+.menu-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 2rem;
+
+    padding: 1rem 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.06);
+
+    transition:
+        padding-left 0.3s ease,
+        color 0.3s ease;
+}
+
+.menu-item:hover{
+    padding-left: 12px;
+}
+
+.menu-item span:first-child{
+    color: var(--platinum);
+
+    line-height: 1.6;
+}
+
+.menu-item span:last-child{
+    color: var(--rosy-granite);
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+/* =========================
+   FAVORITES
+========================= */
+
+.favorite span:first-child{
+    position: relative;
+}
+
+.favorite span:first-child::first-letter{
+    color: var(--favorite-red);
+}
+
+/* =========================
+   VIDEO SECTION
+========================= */
+
+.menu-video{
+    position: sticky;
+
+    top: 120px;
+
+    height: calc(100vh - 160px);
+
+    overflow: hidden;
+
+    border-radius: 32px;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+}
+
+.menu-video video{
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    animation:
+        videoZoom 20s ease-in-out infinite alternate;
+}
+
+.video-overlay{
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.15),
+            rgba(0,0,0,0.35)
+        );
+
+    z-index: 2;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes videoZoom{
+
+    from{
+        transform: scale(1);
+    }
+
+    to{
+        transform: scale(1.05);
+    }
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 1100px){
+
+    .menu-page{
+        grid-template-columns: 1fr;
+
+        gap: 3rem;
+    }
+
+    .menu-video{
+        position: relative;
+
+        top: auto;
+
+        height: 500px;
+    }
+
+}
+
+@media(max-width: 768px){
+
+    .menu-page{
+        padding: 8rem 5% 5rem;
+    }
+
+    .menu-heading{
+        font-size: 3rem;
+    }
+
+    .menu-section h2{
+        font-size: 1.75rem;
+    }
+
+    .nav-links{
+        display: none;
+    }
+
+    .nav-toggle{
+        display: block;
+    }
+
+}
+
+@media(max-width: 576px){
+
+    .menu-heading{
+        font-size: 2.5rem;
+    }
+
+    .menu-item{
+        font-size: 0.95rem;
+    }
+
+    .menu-video{
+        height: 350px;
+    }
+
+}
+.menu-card{
+
+    height: fit-content;
+
+}
+.menu-grid{
+
+    align-items: start;
+
+}
+/* =========================
+   NOTE / ADD-ON ITEMS
+========================= */
+
+.note-item span:first-child{
+    color: var(--dim-grey);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.note-item span:last-child{
+    color: var(--dim-grey);
+    font-size: 0.9rem;
+}
+
+/* =====================================================
+   MENU PAGE — COMPREHENSIVE MOBILE & TABLET
+   Breakpoints:
+     Foldable / Small Mobile : ≤ 320px
+     Small Mobile             : 321px – 480px
+     Large Mobile             : 481px – 767px
+     Tablet                   : 768px – 1023px
+     Desktop                  : 1024px+
+===================================================== */
+
+
+/* =====================================================
+   1. GLOBAL MOBILE RESETS
+===================================================== */
+
+@media (max-width: 1023px) {
+
+    html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    body {
+        -webkit-tap-highlight-color: transparent;
+        line-height: 1.6;
+    }
+
+    a, button {
+        min-height: 44px;
+    }
+}
+
+
+/* =====================================================
+   2. HEADER & NAVBAR
+===================================================== */
+
+@media (max-width: 1023px) {
+
+    header {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        transform: none;
+        max-width: none;
+        padding: 0 16px;
+        box-sizing: border-box;
+    }
+
+    .navbar {
+        padding: 0.85rem 1.25rem;
+        border-radius: 0 0 20px 20px;
+        border-top: none;
+        width: 100%;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    /* Full-screen navigation drawer */
+    .nav-links {
+        display: none;
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100dvh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        background: rgba(0, 0, 0, 0.97);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: none;
+        border-radius: 0;
+        padding: 5rem 2rem 3rem;
+        z-index: 998;
+    }
+
+    .nav-links.active {
+        display: flex;
+        animation: drawerIn 0.28s ease forwards;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-links li a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.2rem 2rem;
+        font-size: 1.15rem;
+        font-weight: 500;
+        color: var(--platinum);
+        min-height: 56px;
+        transition: background 0.2s ease;
+    }
+
+    .nav-links li a:active {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    /* Hamburger button */
+    .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 44px;
+        height: 44px;
+        padding: 8px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 999;
+        position: relative;
+    }
+
+    .nav-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        margin: 5px auto;
+        background: var(--platinum);
+        border-radius: 999px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
+
+@keyframes drawerIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Tablet nav logo */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .logo {
+        font-size: 1.7rem;
+    }
+
+    header {
+        padding: 0 24px;
+    }
+}
+
+
+/* =====================================================
+   3. MENU PAGE LAYOUT
+===================================================== */
+
+/* Tablet: single column, video below content */
+@media (max-width: 1023px) {
+
+    .menu-page {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 5rem 6% 4rem;
+    }
+
+    /* Video moves below the menu list */
+    .menu-video {
+        order: 2;
+        position: relative;
+        top: auto;
+        height: 380px;
+        border-radius: 24px;
+        margin-top: 3rem;
+    }
+
+    .menu-content {
+        order: 1;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .menu-page {
+        padding: 4.5rem 5% 4rem;
+    }
+
+    .menu-video {
+        height: 300px;
+        border-radius: 20px;
+        margin-top: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .menu-page {
+        padding: 4rem 4.5% 3.5rem;
+    }
+
+    .menu-video {
+        height: 240px;
+        border-radius: 16px;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .menu-page {
+        padding: 4rem 4% 3rem;
+    }
+
+    .menu-video {
+        height: 200px;
+    }
+}
+
+
+/* =====================================================
+   4. MENU HEADING & INTRO
+===================================================== */
+
+@media (max-width: 1023px) {
+
+    .menu-heading {
+        font-size: clamp(2.2rem, 8vw, 3.5rem);
+        line-height: 1.08;
+        margin-bottom: 1.5rem;
+    }
+
+    .menu-intro {
+        font-size: 1rem;
+        line-height: 1.85;
+        margin-bottom: 3.5rem;
+        max-width: 100%;
+    }
+
+    .section-tag {
+        font-size: 0.78rem;
+        letter-spacing: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .menu-heading {
+        font-size: clamp(1.85rem, 10vw, 2.6rem);
+        margin-bottom: 1.25rem;
+    }
+
+    .menu-intro {
+        font-size: 0.95rem;
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .menu-heading {
+        font-size: 1.75rem;
+    }
+}
+
+
+/* =====================================================
+   5. MENU SECTIONS & CATEGORIES
+===================================================== */
+
+@media (max-width: 1023px) {
+
+    .menu-section {
+        margin-bottom: 3rem;
+    }
+
+    .menu-section h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        margin-bottom: 0.5rem;
+    }
+
+    .separator {
+        margin-bottom: 1.25rem;
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .menu-section {
+        margin-bottom: 2.5rem;
+    }
+
+    .menu-section h2 {
+        font-size: 1.4rem;
+    }
+}
+
+
+/* =====================================================
+   6. MENU ITEMS — TOUCH OPTIMIZED
+===================================================== */
+
+@media (max-width: 1023px) {
+
+    .menu-item {
+        gap: 1rem;
+        padding: 0.9rem 0;
+        /* Ensure price never wraps under the name */
+        align-items: flex-start;
+    }
+
+    .menu-item span:first-child {
+        flex: 1;
+        font-size: 0.97rem;
+        line-height: 1.55;
+        padding-right: 0.5rem;
+    }
+
+    .menu-item span:last-child {
+        font-size: 0.97rem;
+        flex-shrink: 0;
+        padding-top: 1px;
+    }
+
+    /* Disable the padding-left hover slide on touch */
+    .menu-item:hover {
+        padding-left: 0;
+    }
+
+    /* Touch active feedback instead */
+    .menu-item:active {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        padding-left: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .menu-item {
+        padding: 0.8rem 0;
+        gap: 0.75rem;
+    }
+
+    .menu-item span:first-child {
+        font-size: 0.93rem;
+    }
+
+    .menu-item span:last-child {
+        font-size: 0.93rem;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .menu-item span:first-child,
+    .menu-item span:last-child {
+        font-size: 0.88rem;
+    }
+}
+
+
+/* =====================================================
+   7. NOTE / ADD-ON ITEMS
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .note-item span:first-child,
+    .note-item span:last-child {
+        font-size: 0.84rem;
+    }
+}
+
+
+/* =====================================================
+   8. VIDEO SECTION
+===================================================== */
+
+@media (max-width: 1023px) {
+
+    .menu-video video {
+        animation: none; /* Disable zoom on mobile — saves battery */
+    }
+
+    /* Pause when off-screen handled by JS */
+}
+
+
+/* =====================================================
+   9. SAFE AREA INSETS (notch / home bar)
+===================================================== */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+
+    @media (max-width: 1023px) {
+
+        .menu-page {
+            padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+        }
+
+        header {
+            padding-top: env(safe-area-inset-top);
+        }
+    }
+}
+
+
+/* =====================================================
+   10. REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .menu-video video {
+        animation: none;
+    }
+
+    .menu-item {
+        transition: none;
+    }
+}
