@@ -311,29 +311,150 @@ header{
     overflow: hidden;
 }
 
-.hero::before{
-    content: "";
+/* =========================
+   HERO BACKGROUND PANELS
+========================= */
+
+.hero {
+
+    position: relative;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 8%;
+
+    overflow: hidden;
+
+}
+
+
+.hero-background {
 
     position: absolute;
+
+    inset: 0;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    z-index: -3;
+
+}
+
+
+.hero-panel {
+
+    position: relative;
+
+    background-size: cover;
+
+    background-position: center;
+
+    transform: scale(1.05);
+
+    animation: heroZoom 20s ease-in-out infinite alternate;
+
+}
+
+
+.hero-panel-books {
+
+    background-image:
+        url("../../images/hero-books.webp");
+
+}
+
+
+.hero-panel-coffee {
+
+    background-image:
+        url("../../images/hero-coffee.jpg");
+
+}
+
+
+.hero-panel-food {
+
+    background-image:
+        url("../../images/hero-food.jpg");
+
+}
+
+
+.hero-overlay {
+
+    position: absolute;
+
     inset: 0;
 
     background:
         linear-gradient(
             rgba(0,0,0,0.55),
             rgba(0,0,0,0.55)
-        ),
-        url("../../images/cafebg-2.webp");
+        );
 
-    background-size: cover;
-    background-position: center;
+    z-index: -2;
 
-    z-index: -1;
-
-    animation: heroZoom 20s ease-in-out infinite alternate;
 }
 
-.hero-content{
+
+/* Subtle separators */
+
+.hero-panel:not(:last-child)::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    right: 0;
+
+    width: 1px;
+
+    height: 100%;
+
+    background:
+        rgba(255,255,255,0.08);
+
+}
+.hero-content {
+
+    position: relative;
+
+    z-index: 5;
+
     max-width: 750px;
+
+}
+@media (max-width: 768px){
+
+    .hero-background{
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .hero-panel-books,
+    .hero-panel-food{
+
+        display: none;
+
+    }
+
+
+    .hero-panel-coffee{
+
+        display: block;
+
+    }
+
 }
 
 .hero-subtitle{

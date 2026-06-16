@@ -580,3 +580,37 @@ if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
     document.querySelectorAll("video").forEach(v => v.pause());
 
 }
+/* =========================
+   HERO PANELS REVEAL
+========================= */
+
+const heroPanels = document.querySelectorAll(
+
+    ".hero-panel"
+
+);
+
+
+heroPanels.forEach((panel, index) => {
+
+    panel.style.opacity = "0";
+
+    panel.style.transform = "scale(1.1)";
+
+
+    setTimeout(() => {
+
+        panel.style.transition =
+
+            "opacity 1s ease, transform 1.5s ease";
+
+
+        panel.style.opacity = "1";
+
+        panel.style.transform = "scale(1.05)";
+
+    },
+
+    index * 250);
+
+});
